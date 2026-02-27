@@ -7,39 +7,53 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="is-punch-animating"> <div class="container main-content">
-        <div class="profile-header">
-            <div class="avatar-container">
-                <img src="IMG_0196.jpeg" alt="Avatar" class="avatar">
+<body>
+
+    <div class="manga-container">
+        <div class="top-section">
+            <div class="speed-lines"></div>
+            
+            <div class="onomatopoeia left">ずんっ</div>
+            <div class="onomatopoeia right">ドンッ<br><span>THOOM!</span><br>BAM!</div>
+            
+            <div class="portrait-wrapper">
+                <div class="portrait-circle">
+                    <img src="https://via.placeholder.com/150" alt="Hero">
+                </div>
             </div>
-            <h1 class="nickname">огидне</h1>
-            <p class="quote">«Нужно толкать слона.»</p>
         </div>
 
-        <nav class="links">
-            <a href="https://steamcommunity.com/id/ohydne" target="_blank" class="link-card steam">
-                <i class="fab fa-steam"></i>
-                <span>Steam</span>
-            </a>
-            <a href="https://t.me/ohydne" target="_blank" class="link-card telegram">
-                <i class="fab fa-telegram-plane"></i>
-                <span>Telegram</span>
-            </a>
-        </nav>
+        <div class="quote-bubble">
+            «Нужно толкать слона.»
+        </div>
+
+        <div class="bottom-section">
+            <div class="speed-lines-bottom"></div>
+            
+            <div class="sound-effect-left">BAM!<br><span>ドッ</span></div>
+            <div class="sound-effect-right">THOOM!</div>
+
+            <div class="links-container">
+                <div class="link-bar">
+                    <i class="fab fa-steam"></i>
+                    <span class="platform">Steam —</span>
+                    <span class="handle">@ohydne</span>
+                </div>
+                <div class="link-bar">
+                    <i class="fas fa-gamepad"></i>
+                    <span class="platform">Epic Games —</span>
+                    <span class="handle">@ohydne</span>
+                </div>
+                <div class="link-bar">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span class="platform">Telegram —</span>
+                    <span class="handle">@ohydne</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-text">срал в Азов 2026</div>
     </div>
-
-    <footer>
-        срал в Азов 2026
-    </footer>
-
-    <script>
-        window.addEventListener('load', function() {
-            // Как только страница полностью загрузилась, убираем класс, запускающий анимацию
-            setTimeout(function() {
-                document.body.classList.remove('is-punch-animating');
-            }, 100); // Небольшая задержка перед стартом
-        });
-    </script>
 
 </body>
 </html>
