@@ -1,0 +1,277 @@
+/* Основные настройки в стиле One Punch Man */
+:root {
+    --opm-yellow: #FFCA08; /* Цвет костюма */
+    --opm-red: #D10000;    /* Цвет перчаток/плаща Сайтамы */
+    --opm-red-dark: #A00000; /* Более темный для контраста */
+    --opm-white: #FFFFFF;  /* Плащ */
+    --opm-bg: #f8f8f8;     /* Светлый, чуть сероватый фон */
+    --text-dark: #222;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--opm-bg);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Чтобы элементы не "вылетали" за экран */
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+/* Стилизация аватара как в Telegram */
+.avatar-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--opm-yellow);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white; /* Для белого фона в начале */
+}
+
+.avatar-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(209, 0, 0, 0.2); /* Красная тень при наведении */
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.nickname {
+    margin: 10px 0 5px 0;
+    font-size: 26px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dark);
+}
+
+.quote {
+    font-style: italic;
+    color: #666;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+/* Кнопки-ссылки */
+.links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    background: var(--opm-white);
+    padding: 16px 20px;
+    text-decoration: none;
+    color: var(--text-dark);
+    border-radius: 12px;
+    font-weight: 700;
+    border: 2px solid transparent;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Пружинистый эффект при наведении */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+
+.link-card i {
+    font-size: 24px;
+    margin-right: 18px;
+    width: 30px;
+    text-align: center;
+    color: var(--opm-red);
+    transition: color 0.2s ease;
+}
+
+.link-card:hover {
+    border-color: var(--opm-red);
+    background-color: var(--opm-yellow);
+    color: #000;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(209, 0, 0, 0.15);
+}
+
+.link-card:hover i {
+    color: var(--opm-red-dark);
+}
+
+/* Специфические цвета для иконок при hover */
+.link-card.steam:hover i { color: #171a21; }
+.link-card.epic:hover i { color: #313131; }
+.link-card.telegram:hover i { color: #0088cc; }
+
+
+/* Футер */
+footer {
+    padding: 25px;
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+
+/* =========================================
+   Анимация удара при загрузке (PUNCH EFFECT)
+   ========================================= */
+
+/* Начальное состояние элементов до запуска анимации */
+body.is-punch-animating .avatar-container,
+body.is-punch-animating .nickname,
+body.is-punch-animating .quote,
+body.is-punch-animating .link-card,
+body.is-punch-animating footer {
+    opacity: 0;
+    transform: scale(0.5) translateY(100px) rotate(-10deg);
+}
+
+/* Класс, который убирается через JS для запуска анимации */
+body.is-punch-animating {
+    overflow: hidden; /* Запрет скролла во время анимации */
+}
+
+/* Общий контейнер, который получает "взрывной" эффект */
+body:not(.is-punch-animating) .main-content {
+    animation: contentImpact 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+/* Аватар "вбивается" в экран первым */
+body:not(.is-punch-animating) .avatar-container {
+    animation: avatarPunch 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    animation-delay: 0.1s;
+}
+
+/* Текст заголовка и цитата */
+body:not(.is-punch-animating) .nickname {
+    animation: textAppearImpact 0.5s ease forwards;
+    animation-delay: 0.3s;
+}
+body:not(.is-punch-animating) .quote {
+    animation: textAppearImpact 0.5s ease forwards;
+    animation-delay: 0.4s;
+}
+
+/* Ссылки отлетают волной от центра */
+body:not(.is-punch-animating) .link-card {
+    animation: linkImpactWave 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Задержки для создания эффекта волны (последовательно) */
+body:not(.is-punch-animating) .link-card:nth-child(1) { animation-delay: 0.5s; }
+body:not(.is-punch-animating) .link-card:nth-child(2) { animation-delay: 0.6s; }
+body:not(.is-punch-animating) .link-card:nth-child(3) { animation-delay: 0.7s; }
+
+/* Футер появляется последним */
+body:not(.is-punch-animating) footer {
+    animation: footerAppear 0.5s ease forwards;
+    animation-delay: 0.9s;
+}
+
+/* --- Ключевые кадры (Keyframes) --- */
+
+/* Эффект мощного удара по всему контенту */
+@keyframes contentImpact {
+    0% {
+        opacity: 0;
+        transform: scale(1.2) translateY(-50px);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+}
+
+/* Аватар "вбивается" в экран с отскоком */
+@keyframes avatarPunch {
+    0% {
+        opacity: 0;
+        transform: scale(3) rotate(15deg);
+        filter: brightness(2);
+        box-shadow: 0 0 50px rgba(255, 202, 8, 0.8);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(0.9) rotate(-5deg);
+        filter: brightness(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+}
+
+/* Появление текста с небольшим "вздрагиванием" */
+@keyframes textAppearImpact {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Ссылки отлетают пружинистой волной */
+@keyframes linkImpactWave {
+    0% {
+        opacity: 0;
+        transform: translateX(100%) rotate(20deg);
+        filter: blur(5px);
+    }
+    80% {
+        opacity: 1;
+        transform: translateX(-10px) rotate(-2deg);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0) rotate(0);
+    }
+}
+
+/* Футер плавно появляется снизу */
+@keyframes footerAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
