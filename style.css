@@ -1,8 +1,4 @@
-@font-face {
-    font-family: 'MangaFont';
-    src: url('path-to-your-manga-font.ttf') format('truetype');
-    /* Для полной аутентичности лучше найти шрифт, похожий на стиль манги */
-}
+
 
 body {
     background-color: #f0f0f0;
